@@ -1,11 +1,21 @@
-#!bin/bash
-setup -e
+#!/bin/bash
+set -e
 
-SKILLS_DIR=%USERPROFILE%/.claude/skills
-mkdir -p "SKILLS_DIR"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    SKILLS_DIR="$HOME/.claude/skills"
+    mkdir -p "$SKILLS_DIR"
+    echo "=== Syncing custom skills ==="
+    for SKILL in ./skills/*/; do
+        ln -sf "$PWD/$SKILL" "$SKILLS_DIR/$(basename $SKILL)"
+    done
+    
+else
+    SKILLS_DIR="$USERPROFILE/.claude/skills"
+    mkdir -p "$SKILLS_DIR"
+    echo "=== Syncing custom skills ==="
+    cp -r ./skills/* "$SKILLS_DIR"
+fi
 
-echo "=== Syncing custom skills ==="
-cp -r ./skills/* "SKILLS_DIR"
 
 echo "=== Cloning/updating skills from Anthropic ==="
 
@@ -36,7 +46,6 @@ echo "=== Cloning/updating skills from Matt Pocock Official ==="
 MATT_POCOCK_SKILLS=(
     "grill-me"
     "improve-codebase-architecture"
-    "prd-to-issues"
     "tdd"
     "write-a-prd"
 )
