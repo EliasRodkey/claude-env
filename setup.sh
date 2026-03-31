@@ -48,6 +48,7 @@ MATT_POCOCK_SKILLS=(
     "improve-codebase-architecture"
     "tdd"
     "write-a-prd"
+    "prd-to-plan"
 )
 
 REPO="https://github.com/mattpocock/skills.git"
