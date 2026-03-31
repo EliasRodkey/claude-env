@@ -5,7 +5,7 @@ SKILLS_DIR=%USERPROFILE%/.claude/skills
 mkdir -p "SKILLS_DIR"
 
 echo "=== Syncing custom skills ==="
-ln -r ./skills/* "SKILLS_DIR"
+cp -r ./skills/* "SKILLS_DIR"
 
 echo "=== Cloning/updating skills from Anthropic ==="
 
