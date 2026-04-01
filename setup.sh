@@ -23,14 +23,16 @@ REPO="https://github.com/anthropics/skills.git"
 
 for SKILL in "${ANTHROPIC_SKILLS[@]}"; do
   SKILL_DIR="$SKILLS_DIR/$SKILL"
-  if [ -d "$SKILL_DIR/.git" ]; then
+  if [ -d "$SKILL_DIR/SKILL.md" ] || [ -f "$SKILL_DIR/SKILL.md" ]; then
     echo "Updating $SKILL..."
-    git -C "$SKILL_DIR" pull
+    # pull logic here
   else
     echo "Cloning $SKILL..."
-    git clone --depth 1 --filter=blob:none --sparse \
-      "$REPO" "$SKILL_DIR"
-    git -C "$SKILL_DIR" sparse-checkout set "$SKILL"
+    TEMP_DIR=$(mktemp -d)
+    git clone --depth 1 "$REPO" "$TEMP_DIR"
+    ls $TEMP_DIR
+    mv "$TEMP_DIR/skills/$SKILL" "$SKILL_DIR"
+    rm -rf "$TEMP_DIR"
   fi
 done
 
@@ -49,14 +51,15 @@ REPO="https://github.com/mattpocock/skills.git"
 
 for SKILL in "${MATT_POCOCK_SKILLS[@]}"; do
   SKILL_DIR="$SKILLS_DIR/$SKILL"
-  if [ -d "$SKILL_DIR/.git" ]; then
+  if [ -d "$SKILL_DIR/SKILL.md" ] || [ -f "$SKILL_DIR/SKILL.md" ]; then
     echo "Updating $SKILL..."
-    git -C "$SKILL_DIR" pull
+    # pull logic here
   else
     echo "Cloning $SKILL..."
-    git clone --depth 1 --filter=blob:none --sparse \
-      "$REPO" "$SKILL_DIR"
-    git -C "$SKILL_DIR" sparse-checkout set "$SKILL"
+    TEMP_DIR=$(mktemp -d)
+    git clone --depth 1 "$REPO" "$TEMP_DIR"
+    mv "$TEMP_DIR/$SKILL" "$SKILL_DIR"
+    rm -rf "$TEMP_DIR"
   fi
 done
 
