@@ -39,13 +39,16 @@ Describe the purpose of each top-level directory in 1–2 sentences. Adjust the 
 ## Key Components & Responsibilities
 
 For each major component or module, describe:
+
 - What it owns and does
 - What it explicitly does NOT own (boundaries matter as much as responsibilities)
 
 ### ComponentName
+
 ...
 
 ### ModuleName
+
 ...
 
 ## Decisions & Rationale
@@ -53,9 +56,11 @@ For each major component or module, describe:
 One entry per resolved tech stack decision or meaningful architectural choice. Do not document decisions that were obvious or had no real alternatives.
 
 ### Decision: <short title>
+
 **Chosen**: X
 **Alternatives considered**: Y, Z
 **Reason**: Why X was chosen over the alternatives, including any project-specific constraints that influenced the decision.
 
 ### Decision: <short title>
+
 ...
